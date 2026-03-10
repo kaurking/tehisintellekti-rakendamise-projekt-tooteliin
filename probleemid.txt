@@ -1,0 +1,29 @@
+Probleemid andmete ja vooga:
+
+1. Probleem valguse ja peegeldamisega. Vaatamisest selgub, et plastik peegeldab ruumis olevat valgust ja masinnägemine on keeruline.
+
+2. Töötajad satuvad kaadrisse, et midagi toodete juures opereerida. Liikuv töötaja masinnägemise kaadris võib tekitada
+tooteliini edasiliikumisele sarnase olukorra
+
+3. Esineb regulaarselt pakendeid, millel on sidid ja kuupäev peal, aga pakk ise on tühi. Seda peab tuvastama mitte vale tootena, vaid tühja pakendina.
+
+4. Aegumiskuupäeva tekst võib liikuda ringi ja ei ole alati 100% sama asukoha peal.
+
+5. Pakendi silte on erinevaid. Osadel on sinine ülaosa ja osadel on triipkoodi asetus erinev. 
+
+6. Tootmisliin võib ajutiselt peatuda ja uusi tooteid ei ilmu kaadrisse mõnda aega.
+
+7. Vahepeal tuleb mõni tootmisliini tsükkel selline, et liigub ainult plastik ilma toodete ja siltideta, sellisel juhul võib olla uue 
+tsükli tuvastus raskendatud, kuna plastik on läbipaistev. 
+
+8. Sama tüüpi pakis olev toode võib kohati olla erinevalt paigutatud või mõningasti erinevate värvitoonidega + peegeldus.
+
+9. Toote kuupäev on vale. (tuleneb sellest, et silt ise on vale toote oma? või saab olla ka silt õige, aga masin pani vale kuupäeva?)
+
+10. Sildiprobleemid:
+    1. kumbagi silti pole
+    2. on ainult ülemine silt
+    3. on ainult alumine silt
+    4. on mõlemad sildid, aga need on valed
+    5. on mõlemad sildid, aga üks neist on vale.
+    6. Siltide asukoht on halb/viltune
