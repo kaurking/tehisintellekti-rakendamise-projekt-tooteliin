@@ -1,0 +1,81 @@
+import cv2
+import os
+import json
+from datetime import datetime
+
+# --- KONFIGURATSIOON (Eelmistest ülesannetest tuttav) ---
+INPUT_FOLDER = "pictures/rulaad"  # Kaust, kus asuvad täiskaadrid
+OUTPUT_SUBFOLDER = "individual_products/rulaad"
+capture_date = datetime(2026, 2, 14)
+
+if not os.path.exists(INPUT_FOLDER):
+    print(f"Viga: Sisendkausta '{INPUT_FOLDER}' ei eksisteeri.")
+    exit()
+
+image_files = [f for f in os.listdir(INPUT_FOLDER) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
+image_files.sort()
+print(f"Leiti {len(image_files)} pilti töötlemiseks.")
+
+# Loome väljundkausta
+output_base = os.path.join(os.path.dirname(INPUT_FOLDER), OUTPUT_SUBFOLDER)
+os.makedirs(output_base, exist_ok=True)
+
+# Vastavustabel kausta nime ja EAN koodi vahel
+FOLDER_TO_EAN = {
+    "rulaad": "4740574008052",
+    "kalkun": "4740574090002",
+    "veis": "4740574081192",
+    "salami": "4740574009820"
+}
+
+# Leiame õige toote info kausta nime järgi
+ean = FOLDER_TO_EAN.get(INPUT_FOLDER.split('/')[1])
+
+with open('template/barcode_data.json', 'r') as f:
+    barcode_data = json.load(f)
+
+current_product = barcode_data.get(ean)
+current_product["_ean"] = ean
+
+if not current_product:
+    print(f"Viga: Tooteinfot EAN {ean} jaoks ei leitud.")
+    exit()
+
+required_keys = ["rois"]
+if not all(k in current_product for k in required_keys):
+    print("ROIS väli puudub")
+    exit()
+
+# --- ÜLESANNE 1: Toodete lõikamine ja normaliseerimine ---
+
+for filename in image_files:
+    file_path = os.path.join(INPUT_FOLDER, filename)
+    frame = cv2.imread(file_path)
+    if frame is None: continue
+    
+    base_name = os.path.splitext(filename)[0]
+    temp_slices = []
+
+        # Lõikame välja 4 pakendit
+    for pkg_id, coords in current_product["rois"].items():
+        x1, y1 = coords[0]
+        x2, y2 = coords[1]
+        roi_crop = frame[y1:y2, x1:x2]
+        
+        # Roteerime 90 kraadi vastupäeva
+        rotated = cv2.rotate(roi_crop, cv2.ROTATE_90_COUNTERCLOCKWISE)
+        temp_slices.append(rotated)
+
+    # Skaleerime kõik viilud ühtlasele suurusele (võttes aluseks suurima)
+    max_h = max(s.shape[0] for s in temp_slices)
+    max_w = max(s.shape[1] for s in temp_slices)
+
+    for i, s_img in enumerate(temp_slices):
+        final_slice = cv2.resize(s_img, (max_w, max_h))
+        slice_filename = f"{base_name}_slice_{i+1}.png"
+        cv2.imwrite(os.path.join(output_base, slice_filename), final_slice)
+    
+    print(filename+"  -> Salvestatud 4 toote pilti.")
+
+
+print("\nÜlesanne 1 lõpetatud.")

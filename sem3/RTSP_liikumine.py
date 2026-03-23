@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import threading
 from pathlib import Path
 
+# NB Tegelikult peaks võtma nt 6 ala, kus kõik muutuvad. Kui kõik muutuvad, siis võt miinimumväärtus nendest?
 
 class RTSPStreamReader:
     def __init__(self, url):
@@ -46,14 +47,18 @@ Eesmärk: Tuvastada konveieril liikumine, oodata pildi stabiliseerumist ja salve
 # STREAM_URL = "rtsp://172.17.37.81:8554/salami"
 # STREAM_URL = "rtsp://172.17.37.81:8554/veis"
 # STREAM_URL = "rtsp://172.17.37.81:8554/kalkun"
-STREAM_URL = "rtsp://172.17.37.81:8554/rulaad"
+# STREAM_URL = "rtsp://172.17.37.81:8554/rulaad"
+
+# vigased
+# STREAM_URL = "rtsp://172.17.37.81:8554/empty"
+STREAM_URL = "rtsp://172.17.37.81:8554/false_alarm"
 
 MOTION_THRESHOLD = 15.0  # Lävend, millest suurem muutus loetakse liikumiseks
 CAPTURE_DELAY = 3      # Sekundid, mida oodatakse peale liikumise algust enne pildi tegemist
 
 # Kausta loomine (eelmise ülesande lahendus)
 folder_name = STREAM_URL.split('/')[-1].strip()
-folder = Path("pictures") / folder_name
+folder = Path("../pictures") / folder_name
 folder.mkdir(parents=True, exist_ok=True)
 
 def is_green_screen(frame):
@@ -101,6 +106,7 @@ frame_count = 0
 
 try:
     while True:
+        loop_start = time.perf_counter()
         # Loeme kaks järjestikust kaadrit
         ret1, frame1 = stream.read()
         time.sleep(0.02) # Väike paus, et kaadrid jõuaksid muutuda
@@ -138,7 +144,7 @@ try:
             aeg_frame = time.time()
             end = time.perf_counter()
             aeg = end - start
-            print(aeg)
+            #print(aeg)
             kaadrivahed.append(vahe)
             tuvastusajad.append(aeg_frame)
 
@@ -152,6 +158,10 @@ try:
                 frame_count += 1
                 motion_triggered = False
 
+        loop_end = time.perf_counter()
+        fps = 1 / (loop_end - loop_start)
+        # print(fps)
+
 
 except KeyboardInterrupt:
     print("\nClosing program.")            
@@ -160,7 +170,7 @@ finally:
     stream.stop()
     # ÜLESANNE: joonista graafik, kasuta näiteks plt.plot(), plt.axhline()(lävendi jaoks), 
     # pane ka nimi ja telgede nimed. salvesta graafik faili
-    graph_folder = Path("graphs")
+    graph_folder = Path("../graphs")
     graph_folder.mkdir(parents=True, exist_ok=True)
 
     graph_file = graph_folder / f"{folder_name}_graafik.png"
