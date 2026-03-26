@@ -10,7 +10,6 @@ from typing import List
 import easyocr
 import torch
 from PIL import Image
-from strhub.data.module import SceneTextDataModule
 from helpers import get_formatted_date
 
 
@@ -27,12 +26,19 @@ parseq_model = torch.hub.load('baudm/parseq', 'parseq', pretrained=True).eval()
 device = torch.device("cpu") # Määra seade selgesõnaliselt CPU-le
 parseq_model = parseq_model.to(device) # Liiguta mudel CPU-le 
 print(f"PARSeq mudel töötab seadmel: {device}")
-parseq_img_transform = SceneTextDataModule.get_transform(parseq_model.hparams.img_size)
+import torchvision.transforms as T
+parseq_img_transform = T.Compose(
+            [
+                T.Resize(parseq_model.hparams.img_size, T.InterpolationMode.BICUBIC),
+                T.ToTensor(),
+                T.Normalize(0.5, 0.5),
+            ]
+        )
 
 # 3. PaddleOCR Model
 import paddlex as pdx
 # Näide seadistamisest skriptis (ei pruugi olla efektiivne kõigi PaddlePaddle komponentide jaoks):
-os.environ['OMP_NUM_THREADS'] = "1" # Määra kõikidele saadaolevatele CPU tuumadele
+os.environ['OMP_NUM_THREADS'] = "8" # Määra kõikidele saadaolevatele CPU tuumadele
 #os.environ['MKL_NUM_THREADS'] = '8'
 #os.environ['KMP_AFFINITY'] = 'granularity=fine,compact,1,0' # Inteli CPU-de jaoks, kui MKL-i kasutatakse
 paddle_model = pdx.create_model("PP-OCRv5_server_rec") # proovi, mis juhtub mobiiliversiooniga
@@ -65,19 +71,28 @@ def tuvastus_easyocr(image_batch: List[np.ndarray]) -> List[str]:
         raw_texts.append(" ".join([res[1] for res in results]))
     return raw_texts
 
-def tuvastus_parseq(pildid, model, transform, device):
-    if not pildid:
+def tuvastus_parseq(image_batch: List[np.ndarray]) -> List[str]:
+    """
+    Performs OCR using the pre-loaded PARSeq model on a batch of images.
+    Returns a list of raw extracted texts, one for each image in the batch.
+    """
+    if not image_batch:
         return []
+
+    pil_images = [Image.fromarray(img_rgb) for img_rgb in image_batch]
     
-    pil_images = [Image.fromarray(cv2.cvtColor(p, cv2.COLOR_BGR2RGB)) for p in pildid]
-    transformed_imgs = [transform(img) for img in pil_images]
-    batch_tensor = torch.stack(transformed_imgs).to(device)
-
+    # Rakenda teisendus ja lisa partii dimensioon (mudel ootab partiid).
+    transformed_imgs = [parseq_img_transform(pil_img) for pil_img in pil_images]
+    batch_tensor = torch.stack(transformed_imgs).to(parseq_model.device) # Liiguta sisendtenser mudeliga samale seadmele.
+    
     with torch.no_grad():
-        logits = model(batch_tensor)
-        preds = model.tokenizer.decode(logits.softmax(-1))
-
-    return [p[0] for p in preds]
+        logits = parseq_model(batch_tensor)
+    
+    # Dekodeeri kõrgeima tõenäosusega märgid kogu partii jaoks.
+    pred = logits.softmax(-1)
+    labels, _ = parseq_model.tokenizer.decode(pred)
+    
+    return labels # labels is already a list of strings
 
 
 def tuvastus_paddleocr(image_batch: List[np.ndarray]) -> List[str]:
@@ -100,9 +115,6 @@ def tuvastus_paddleocr(image_batch: List[np.ndarray]) -> List[str]:
     return raw_texts
 
 def main():
-    parseq_model = None
-    parseq_img_transform = None
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     ocr_function = None
     model_name_for_print = ""
 
@@ -110,13 +122,7 @@ def main():
         ocr_function = tuvastus_easyocr
         model_name_for_print = "EasyOCR"
     elif OCR_MODEL_CHOICE == "parseq":
-        from strhub.models.utils import create_model
-        parseq_model = create_model('parseq', pretrained=True).eval().to(device)
-        parseq_img_transform = SceneTextDataModule.get_transform(parseq_model.hparams.img_size)
-
-        ocr_function = lambda image_batch: tuvastus_parseq(
-            image_batch, parseq_model, parseq_img_transform, device
-        )
+        ocr_function = tuvastus_parseq
         model_name_for_print = "PARSeq"
     elif OCR_MODEL_CHOICE == "paddleocr":
         ocr_function = tuvastus_paddleocr

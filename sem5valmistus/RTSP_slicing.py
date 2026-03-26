@@ -8,10 +8,10 @@ from dynamsoft_barcode_reader_bundle import *
 from helpers import RTSPStreamReader, is_green_screen, measure_global_change
 
 # --- KONFIGURATSIOON ---
-#STREAM_URL = "rtsp://172.17.37.81:8554/salami"
+STREAM_URL = "rtsp://172.17.37.81:8554/salami"
 #STREAM_URL = "rtsp://172.17.37.81:8554/veis"
 #STREAM_URL = "rtsp://172.17.37.81:8554/kalkun"
-STREAM_URL = "rtsp://172.17.37.81:8554/rulaad"
+#STREAM_URL = "rtsp://172.17.37.81:8554/rulaad"
 MOTION_THRESHOLD = 15.0
 CAPTURE_DELAY = 2.5
 DYNAMSOFT_LICENSE = "t0084YQEAAIUx4hU4EqEOu9FaT9GprNtmXmbGA7IcvmG7V7l1yrR4WjV1JWPPrLuJoJN4HXVvqroIag2MeSFUJlbpkh0vhl8/Nrk3lffN1GzB7BvBtkl5"
@@ -27,7 +27,7 @@ if err_code != EnumErrorCode.EC_OK:
     print(f"Failed to load JSON settings from file: {err_msg}")
     exit()
 
-with open('../templates/barcode_data.json', 'r') as f:
+with open('../template/barcode_data.json', 'r') as f:
     barcode_data = json.load(f)
 
 folder_name = STREAM_URL.split('/')[-1]

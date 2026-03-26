@@ -1,0 +1,228 @@
+1. google/gemini-2.0-flash-001
+--- Üldine OCR-statistika (OpenRouter - google/gemini-2.0-flash-001) ---
+Kõikidest kaustadest leitud faile kokku: 376
+Keskmine OCR-i töötlusaeg pildi kohta: 1.2708 sekundit
+
+--- Leitud unikaalsed kuupäevad (loendus) ---
+15.03.2026: 168 times
+NA: 41 times
+18.05.2026: 29 times
+16.03.2026: 9 times
+14.03.2026: 7 times
+16.05.2026: 5 times
+15.03.2020: 4 times
+15.01.2026: 4 times
+15.09.2026: 4 times
+15.03.2025: 4 times
+19.03.2026: 3 times
+11.03.2026: 3 times
+10.03.2026: 3 times
+15.03.2076: 3 times
+13.03.2026: 3 times
+18.05.2024: 3 times
+18.05.2023: 3 times
+15.03.2027: 2 times
+15.03.2024: 2 times
+10.04.2026: 2 times
+16.03.2024: 2 times
+10.03.2020: 2 times
+15.02.2026: 2 times
+18.06.2026: 2 times
+18.05.2020: 2 times
+18.03.2026: 2 times
+16.06.2026: 1 times
+15.03.2023: 1 times
+10.12.2016: 1 times
+13.03.2025: 1 times
+16.08.2026: 1 times
+03.03.2021: 1 times
+06.03.2020: 1 times
+14.06.2026: 1 times
+15.03.2070: 1 times
+11.03.2020: 1 times
+05.01.2024: 1 times
+11.03.2076: 1 times
+11.05.2026: 1 times
+11.06.2026: 1 times
+04.01.2025: 1 times
+15.12.2026: 1 times
+05.03.2020: 1 times
+15.09.2025: 1 times
+05.06.2021: 1 times
+16.03.2021: 1 times
+15.06.2024: 1 times
+13.09.2024: 1 times
+15.01.2021: 1 times
+06.03.2023: 1 times
+12.03.2026: 1 times
+11.06.2016: 1 times
+31.03.2026: 1 times
+06.10.2026: 1 times
+15.03.2021: 1 times
+15.07.2026: 1 times
+16.03.2025: 1 times
+16.11.2026: 1 times
+16.03.2027: 1 times
+06.03.2026: 1 times
+04.03.2026: 1 times
+15.03.2028: 1 times
+01.02.2026: 1 times
+15.09.2024: 1 times
+05.06.2024: 1 times
+01.03.2023: 1 times
+18.03.2020: 1 times
+15.09.2028: 1 times
+06.03.2027: 1 times
+15.03.2022: 1 times
+30.05.2020: 1 times
+10.06.2026: 1 times
+18.05.2016: 1 times
+13.06.2026: 1 times
+17.05.2026: 1 times
+19.02.2026: 1 times
+18.01.2024: 1 times
+10.05.2020: 1 times
+30.06.2020: 1 times
+14.05.2029: 1 times
+18.05.2075: 1 times
+23.05.2020: 1 times
+18.05.2029: 1 times
+06.05.2020: 1 times
+18.05.2025: 1 times
+01.05.2026: 1 times
+10.05.2026: 1 times
+18.05.2046: 1 times
+
+--- OpenRouter API kasutus kokkuvõte ---
+Kasutatud mudel: google/gemini-2.0-flash-001
+Total API Calls: 376
+Total Prompt Tokens: 416,984
+Total Completion Tokens: 3,473
+Total Tokens: 420,457
+Hinnanguline maksumus (OpenRouter krediidid): $0.043088
+
+--- Hinnanguline päevane kulu (praeguse käivituse põhjal) ---
+Eeldused: 16h tööpäev, 1 takt iga 7s järel, 8 kuupäeva ala takti kohta.
+Hinnanguline töödeldud piltide arv päevas: 65829
+Hinnanguline päevane kulu: $7.543604
+
+
+2. meta-llama/llama-3.2-11b-vision-instruct
+
+--- Üldine OCR-statistika (OpenRouter - meta-llama/llama-3.2-11b-vision-instruct) ---
+Kõikidest kaustadest leitud faile kokku: 376
+Keskmine OCR-i töötlusaeg pildi kohta: 0.6609 sekundit
+
+--- Leitud unikaalsed kuupäevad (loendus) ---
+15.03.2026: 165 times
+NA: 31 times
+18.05.2026: 27 times
+16.03.2026: 12 times
+15.02.2026: 11 times
+15.01.2026: 5 times
+15.07.2026: 5 times
+10.03.2026: 5 times
+15.03.2020: 4 times
+15.03.2024: 4 times
+16.05.2026: 4 times
+15.03.2025: 3 times
+15.08.2026: 3 times
+15.10.2026: 3 times
+15.09.2024: 3 times
+15.05.2026: 3 times
+13.05.2026: 3 times
+15.09.2026: 2 times
+10.08.2026: 2 times
+15.11.2026: 2 times
+11.03.2026: 2 times
+15.12.2026: 2 times
+15.03.2027: 2 times
+19.03.2026: 2 times
+07.03.2026: 2 times
+10.05.2026: 2 times
+19.05.2026: 2 times
+01.01.2025: 1 times
+03.07.2026: 1 times
+16.03.2016: 1 times
+14.02.2029: 1 times
+07.01.2026: 1 times
+15.02.2020: 1 times
+15.06.2026: 1 times
+03.11.2026: 1 times
+11.08.2026: 1 times
+16.03.2021: 1 times
+25.03.2020: 1 times
+16.09.2026: 1 times
+13.07.2024: 1 times
+15.12.2024: 1 times
+01.03.2026: 1 times
+15.04.2026: 1 times
+12.06.2026: 1 times
+26.01.2026: 1 times
+10.04.2024: 1 times
+03.03.2026: 1 times
+05.02.2021: 1 times
+16.07.2020: 1 times
+06.03.2028: 1 times
+16.01.2026: 1 times
+30.12.2028: 1 times
+02.02.2020: 1 times
+15.00.2027: 1 times
+05.02.2026: 1 times
+30.04.2026: 1 times
+02.02.2024: 1 times
+16.00.2026: 1 times
+16.03.2024: 1 times
+07.02.2026: 1 times
+03.03.2028: 1 times
+15.07.2024: 1 times
+12.01.2026: 1 times
+15.08.2024: 1 times
+16.02.2020: 1 times
+03.02.2026: 1 times
+15.05.2020: 1 times
+03.12.2023: 1 times
+15.02.2028: 1 times
+06.03.2024: 1 times
+16.02.2026: 1 times
+15.13.2026: 1 times
+16.03.2020: 1 times
+16.07.2026: 1 times
+10.06.2026: 1 times
+18.05.2015: 1 times
+26.12.2026: 1 times
+18.06.2026: 1 times
+20.02.2025: 1 times
+10.07.2026: 1 times
+18.05.2025: 1 times
+15.02.2024: 1 times
+14.05.2026: 1 times
+05.07.2026: 1 times
+05.07.2020: 1 times
+18.05.2024: 1 times
+06.06.2026: 1 times
+18.04.2026: 1 times
+16.08.2020: 1 times
+15.02.2025: 1 times
+18.11.2023: 1 times
+16.06.2026: 1 times
+
+--- OpenRouter API kasutus kokkuvõte ---
+Kasutatud mudel: meta-llama/llama-3.2-11b-vision-instruct
+Total API Calls: 376
+Total Prompt Tokens: 640,328
+Total Completion Tokens: 2,550
+Total Tokens: 642,878
+Hinnanguline maksumus (OpenRouter krediidid): $0.031501
+
+--- Hinnanguline päevane kulu (praeguse käivituse põhjal) ---
+Eeldused: 16h tööpäev, 1 takt iga 7s järel, 8 kuupäeva ala takti kohta.
+Hinnanguline töödeldud piltide arv päevas: 65829
+Hinnanguline päevane kulu: $5.515073
+
+
+3. openai/gpt-5-nano (Võtab kohutavalt kaua aega)
+
+
+
+

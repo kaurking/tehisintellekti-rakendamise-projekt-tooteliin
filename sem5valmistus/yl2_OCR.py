@@ -13,6 +13,7 @@ from helpers import get_formatted_date, OpenRouterOCR
 # Määra oma OpenRouter API võti keskkonnamuutujana või asenda kohatäide.
 # API võtmete jaoks on tungivalt soovitatav kasutada keskkonnamuutujaid.
 # TODO Key here
+OPENROUTER_API_KEY = "" # you thought ...
 
 # Vali oma VLM mudel OpenRouteri kaudu.
 # Mudeleid ja nende hinnakujundust leiad aadressilt https://openrouter.ai/docs#models
@@ -20,7 +21,7 @@ from helpers import get_formatted_date, OpenRouterOCR
 # "google/gemini-2.0-flash-001" (Gemini 1.5 Flash)
 # "qwen/qwen3.5-flash-02-23" (Qwen 3.5 Flash)
 # "meta-llama/llama-3.2-11b-vision-instruct" (Llama 3.2 Vision)
-OPENROUTER_MODEL = "google/gemini-2.0-flash-001" # Default model, change as needed
+OPENROUTER_MODEL = "openai/gpt-5-nano" # Default model, change as needed
 
 # Defineeri LLM-i viip kuupäeva eraldamiseks
 OCR_SYSTEM_PROMPT = "You are an expert OCR system. Your task is to extract the expiry date from the provided image. The date format is DD.MM.YYYY. If you cannot find a date, respond with 'N/A'."

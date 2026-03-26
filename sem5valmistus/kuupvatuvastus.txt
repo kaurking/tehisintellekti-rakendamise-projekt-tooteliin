@@ -1,0 +1,17 @@
+Testitud mudelid: google/gemini-2.0-flash-001, meta-llama/llama-3.2-11b-vision-instruct, openai/gpt-5-nano (mõttetu selle ülesande jaoks, läheb kohutavalt kaua)
+
+
+Q1 Parim OCR oli umbes 90 kuupäeva silti, 1. mudel oli peaaegu 2 korda rohkem, 2. mudel oli samuti peaaegu 2 korda rohkem, kolmas mudel oli 
+kasutuskõlbamatu, kuna võttis kordades rohkem aega ja jooksis arvutis ni kaua, et pole kasutatav.
+
+
+Q2 OCR oli 0.02s, 1. mudel oli 1.27s, 2. mudel oli 0,66s. Ühesõnaga LLM mudelitel kulus palju kauem, et tuvastada kuupäevi.
+Lausa kohati nii kaua, et 4 pildi tuvastamiseks kuluv aeg läheneb ühe takti ajale. Mudelite vahel on ka märgatavad erinevused. llama tegelikult
+oli pigem kiire ja saaks kasutada.
+
+Q3 Kaks ideed. Esiteks saaks teha nii, et LLM ei analüüsi pilte reaalajas, vaid teeb seda eraldi tempos sõltumata liini tööst. Teine võimalus oleks
+kasutada sellist varianti, et alguses kasutada OCR meetodit ja kui saame selgelt valed kuupäevad (formaat ei ole õige, aasta on nt 3026), 
+siis nende piltide peal kasutada LLM ainult, seda peaks aga testima enne.
+
+Q4 Kiirus on hea, aga minu arvates ei ole 81/300 piisavalt hea. Arvestades, et maksumus, et saada 2x paremaid tulemusi on mitte rohkem kui 10 eur
+päevas (+ arenduskulud), siis on see seda väärt. 
